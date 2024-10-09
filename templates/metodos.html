@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Métodos Do Caixeiro Viajante</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/metodos.css') }}">
+
+</head>
+<header>
+<br>
+    <a href="/" >
+        <img src="{{ url_for ('static',filename='img/seta.png') }}">
+    </a>
+
+</header>
+
+<body background="{{ url_for ('static',filename='img/reMapa.jpeg') }}">
+   
+ <div class=" sapo">
+        <main>
+            <h2>Escolha Qual Método Deseja Visualizar</h2>
+            <button type="button" id="gerar-problema-btn">GERAR PROBLEMA</button>
+            <br> <br>
+            <button type="button" id="solucao-inicial-btn">SOLUÇÃO INICIAL</button>
+            <br> <br>
+            <button type="button" id="avalia-btn">AVALIA</button>
+            <br> <br>
+
+            <div id="matriz-container" class="hidden">
+                <h2>Matriz Gerada</h2>
+                    {% for row in matriz %}
+                        {% for cell in row %}
+                            <span style="display: inline-block; width: 30px; text-align: center; border: 1px solid white;">
+                                {{ cell }}
+    
+                            </span>
+                        {% endfor %}
+                        <br>
+                    {% endfor %}
+              
+            </div>
+
+            <div id="solucao-inicial-container" class="hidden">
+                <h2>Solução Inicial</h2>
+                <p>Solução Inicial: {{ SoluIni }}</p>
+            </div>
+
+            <div id="avalia-container" class="hidden">
+                <h2>Método Avalia</h2>
+                    <p>Avaliação: {{ Avalia }}</p>
+            </div>
+        </main>
+    </div>
+
+        <script src="{{ url_for ('static', filename='js/metodos.js') }}">
+       
+        </script>
+   
+</body>
+</html>

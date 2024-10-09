@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Caixeiro Viajante</title>
+        <link rel="stylesheet" href="{{ url_for ('static', filename='css/home.css') }}">
+    </head>
+    
+
+    <body background="{{ url_for ('static', filename='img/mapaPoint.jpg') }}">
+    
+        <div class="sapo">
+            <main>
+                <form id="form" action="/metodos" method="post">
+                    <center>
+                        <h2>Simulação de Caixeiro Viajante</h2>
+                        <br>
+                    </center>
+
+                    <label for="tMatriz">Matriz: </label><br><br>
+                    <input class="input-field" type="number" placeholder="Tamanho da Matriz" name="tMatriz" id="tMatriz" required><br><br>
+
+                    <label for="cMin">Custo Minímo: </label><br><br>
+                    <input class="input-field" type="number" placeholder="Custo Min entre os Pontos" name="cMin" id="cMin" min="1" max="100" required><br><br>
+
+                    <label for="cMax">Custo Máximo: </label><br><br>
+                    <input class="input-field" type="number" placeholder="Custo Máx entre Pontos" name="cMax" id="cMax" min="1" max="100" required><br><br><br>
+
+                    <center>
+                        <button type="submit">Gerar Matriz</button>
+                    </center>
+                </form>
+            </main>
+        </div>
+
+        <script src="{{ url_for ('static', filename='js/home.js') }}">
+        </script>
+    </body>
+</html>

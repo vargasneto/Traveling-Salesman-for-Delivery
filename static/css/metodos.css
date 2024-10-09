@@ -1,0 +1,45 @@
+.container {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+.hidden {
+    display: none;
+}
+.sapo {
+        background-color: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 60px;
+        border-radius: 25px;
+        color: white;
+    }
+
+    input {
+        padding: 5px;
+        border: none;
+        outline: none;
+        width: 100%;
+    }
+
+    button {
+        background-color: slateblue;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        border-radius: 15px;
+        color: white;
+        
+    }
+
+    button:hover {
+        background-color: slateblue;
+        cursor: pointer;
+    }
+
+    .input-field {
+        width: 80%;
+    }
