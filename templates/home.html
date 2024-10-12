@@ -2,6 +2,7 @@
     <head>
         <title>Caixeiro Viajante</title>
         <link rel="stylesheet" href="{{ url_for ('static', filename='css/home.css') }}">
+        <link rel="icon" href="{{ url_for ('static', filename='img/icon.png') }}">
     </head>
     
 
@@ -11,21 +12,21 @@
             <main>
                 <form id="form" action="/metodos" method="post">
                     <center>
-                        <h2>Simulação de Caixeiro Viajante</h2>
+                        <h2>Traveling Delivery</h2>
                         <br>
                     </center>
 
-                    <label for="tMatriz">Matriz: </label><br><br>
-                    <input class="input-field" type="number" placeholder="Tamanho da Matriz" name="tMatriz" id="tMatriz" required><br><br>
+                    <label for="tMatriz">Pontos de Entrega: </label><br><br>
+                    <input class="input-field" type="number" placeholder=" Há Quantos Pontos?" name="tMatriz" id="tMatriz"   min="2" max="40" required><br><br>
 
-                    <label for="cMin">Custo Minímo: </label><br><br>
-                    <input class="input-field" type="number" placeholder="Custo Min entre os Pontos" name="cMin" id="cMin" min="1" max="100" required><br><br>
+                    <label for="cMin">Tempo Minímo de uma Entrega: </label><br><br>
+                    <input class="input-field" type="number" placeholder="Tempo Min da Entrega " name="cMin" id="cMin" min="1" max="30" required><br><br>
 
-                    <label for="cMax">Custo Máximo: </label><br><br>
-                    <input class="input-field" type="number" placeholder="Custo Máx entre Pontos" name="cMax" id="cMax" min="1" max="100" required><br><br><br>
+                    <label for="cMax">Tempo Máximo de uma Entrega: </label><br><br>
+                    <input class="input-field" type="number" placeholder="Tempo Máx da Entrega" name="cMax" id="cMax" min="1" max="100" required><br><br><br>
 
                     <center>
-                        <button type="submit">Gerar Matriz</button>
+                        <button type="submit">Enviar</button>
                     </center>
                 </form>
             </main>

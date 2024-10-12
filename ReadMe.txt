@@ -12,4 +12,4 @@ de o comando: .\venv\Scripts\activate
 - esse comando irá disponibilizar o IP da aplicação no terminal, basta dar um ctrl+botão direito e pronto, será redirecionado a aplicação.
 
 
-													Atenciosamente, Pedro & Mateus Lima
+													Atenciosamente, Pedro Vargas & Mateus Lima

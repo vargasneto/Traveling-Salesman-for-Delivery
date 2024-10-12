@@ -6,7 +6,7 @@ form.addEventListener('submit', (e) => {
     const max = document.getElementById('cMax').valueAsNumber;
 
     if (min > max) {
-        alert('Erro: O custo mínimo não pode ser maior que o custo máximo.');
+        alert('Erro: O Tempo mínimo não pode ser maior que o Tempo máximo.');
         e.preventDefault(); 
     }
 });
