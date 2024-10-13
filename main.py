@@ -15,12 +15,15 @@ def home():
 @app.route("/metodos",methods=['POST'])
 def dados():
      tam_Matriz=int(request.form.get('tMatriz'))
+
      Min_D=int(request.form.get('cMin'))
      Max_D=int(request.form.get('cMax'))
      matriz_A = Gerar_Problema(tam_Matriz,Min_D,Max_D)
      solucao_I=Solucao_Inicial(tam_Matriz)
      avalia= Avalia(tam_Matriz,solucao_I,matriz_A)
      sub_EncostaSi,sub_EncostaVn= Subida_Encosta(solucao_I,avalia,matriz_A)
+     sub_Encosta_AlteradaSi,sub_Encosta_AlteradaVn= Subida_Encosta_Alterada(solucao_I,avalia,matriz_A,len(solucao_I))
+
      novo,vn=sucessores_se(solucao_I,avalia,matriz_A)
 
      print("Matriz:",matriz_A)
@@ -28,6 +31,8 @@ def dados():
      print('\nAvalia',avalia)
      print('\nSolução da Subida Encosta',sub_EncostaSi)
      print('\nTempo da Subida Encosta',sub_EncostaVn)
+     print('\nSolução da Subida de Encosta Alterada',sub_Encosta_AlteradaSi)
+     print('\vValor da Subida de Encosta Alterada',sub_Encosta_AlteradaVn)
      print('\nNova Melhor Solução',novo)
      print('\nNovo Melhor Valor',vn)
      return render_template("metodos.html", matriz=matriz_A.tolist(),SoluIni=solucao_I.tolist(),Avalia=avalia)
@@ -98,7 +103,28 @@ def Subida_Encosta(atual,vi,tempo):
         else:
             atual = cp.deepcopy(novo)
             va = vn
+            return atual, va
 
+
+def Subida_Encosta_Alterada(atual,vi,tempo,tMax):
+    atual = cp.deepcopy(atual)
+    va = vi
+    t=0
+    qt = 0
+    while True:
+        qt += 1
+        novo, vn = sucessores_se(atual,va,tempo)
+        if vn>=va:
+            if t>tMax:
+                return atual
+            else:
+             tMax+=1 
+            return atual, va
+        else:
+            atual = cp.deepcopy(novo)
+            va = vn
+            t=0
+        return atual,va
 
 
 if __name__ == '__main__':
