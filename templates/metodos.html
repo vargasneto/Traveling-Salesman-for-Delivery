@@ -18,36 +18,38 @@
    
  <div class=" sapo">
         <main>
-            <h2>Escolha Qual Método Deseja Visualizar</h2>
-            <button type="button" id="gerar-problema-btn">GERAR PROBLEMA</button>
+            <h2>Escolha Qual Solução Deseja Visualizar</h2>
+            <button type="button" id="gerar-problema-btn">Base</button>
             <br> <br>
-            <button type="button" id="solucao-inicial-btn">SOLUÇÃO INICIAL</button>
-            <br> <br>
-            <button type="button" id="avalia-btn">AVALIA</button>
+            <button type="button" id="solucao-inicial-btn">Melhor</button>
             <br> <br>
 
             <div id="matriz-container" class="hidden">
-                <h2>Matriz Gerada</h2>
-                    {% for row in matriz %}
-                        {% for cell in row %}
-                            <span style="display: inline-block; width: 30px; text-align: center; border: 1px solid white;">
-                                {{ cell }}
-    
-                            </span>
-                        {% endfor %}
-                        <br>
-                    {% endfor %}
-              
+                <h4>Com base nos dados inseridos foi gerado uma matriz.Baseada nela, obtivemos esse resultado:</h4>
+                 <h4>Solução Inicial</h4>
+                 <p>Rota: {{ SoluIni }}</p>
+                  <h4>Tempo estimado</h4>
+                  <p> Tempo: {{ Avalia}} min</p>
             </div>
 
             <div id="solucao-inicial-container" class="hidden">
-                <h2>Solução Inicial</h2>
-                <p>Solução Inicial: {{ SoluIni }}</p>
+                <h4>Aplicando os algoritmos de busca local, obtivemos os seguintes resultados:</h4>
+                <h4>Subida de Encosta</h4>
+                <p>Rota: {{ EncostaSi }}</p>
+                <p>Tempo Estimado: {{ EncostaVa }} min</p>
+
+                 <h4>Subida de Encosta Alterado **** MELHOR Resultado</h4>
+                 <p> Rota: {{ EncostaAlt}} </p>
+                 <p> MELHOR Tempo estimado: {{ EncostaAltVa}} min</p>
+                 
+                <h4>Tempera Simulada</h4>
+                 <p> Rota: {{ TempSi}} </p>
+                 <p> Tempo estimado: {{ TempVn}} min</p>
             </div>
 
             <div id="avalia-container" class="hidden">
                 <h2>Método Avalia</h2>
-                    <p>Avaliação: {{ Avalia }}</p>
+                    <p>Melhor Tempo: {{ EncostaAltVa }} min</p>
             </div>
         </main>
     </div>

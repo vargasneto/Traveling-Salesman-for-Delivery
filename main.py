@@ -1,9 +1,8 @@
-from winreg import REG_NONE
 from flask import Flask,render_template, request
 import numpy as np
 import random as rd
 import copy as cp
-
+import math as ma
 
 app = Flask(__name__)
 
@@ -23,6 +22,7 @@ def dados():
      avalia= Avalia(tam_Matriz,solucao_I,matriz_A)
      sub_EncostaSi,sub_EncostaVn= Subida_Encosta(solucao_I,avalia,matriz_A)
      sub_Encosta_AlteradaSi,sub_Encosta_AlteradaVn= Subida_Encosta_Alterada(solucao_I,avalia,matriz_A,len(solucao_I))
+     tempSi,tempVn=Tempera_Simulada(solucao_I,avalia,matriz_A,1000,0.1,0.8)
 
      novo,vn=sucessores_se(solucao_I,avalia,matriz_A)
 
@@ -35,7 +35,8 @@ def dados():
      print('\vValor da Subida de Encosta Alterada',sub_Encosta_AlteradaVn)
      print('\nNova Melhor Solução',novo)
      print('\nNovo Melhor Valor',vn)
-     return render_template("metodos.html", matriz=matriz_A.tolist(),SoluIni=solucao_I.tolist(),Avalia=avalia)
+     return render_template("metodos.html", matriz=matriz_A.tolist(),SoluIni=solucao_I.tolist(),Avalia=avalia,EncostaSi=sub_EncostaSi.tolist(),
+                            EncostaVa=sub_EncostaVn,EncostaAlt=sub_Encosta_AlteradaSi.tolist(),EncostaAltVa=sub_Encosta_AlteradaVn,TempSi=tempSi.tolist(),TempVn=tempVn)
 
 
 def Gerar_Problema(ponto,tMin,tMax):
@@ -66,6 +67,20 @@ def Solucao_Inicial(ponto):
     rd.shuffle(s)
     return s
 
+def sucessores_te(atual,tempo):
+    
+    pos1 = rd.randrange(1,len(atual))
+    pos2 = rd.randrange(1,len(atual))
+    
+    suc = cp.deepcopy(atual)
+        
+    aux       = suc[pos1]
+    suc[pos1] = suc[pos2]
+    suc[pos2] = aux
+        
+    vs = Avalia(len(suc),suc,tempo)
+        
+    return suc, vs
 
 def sucessores_se(atual,va,tempo):
     melhor = cp.deepcopy(atual)
@@ -94,38 +109,53 @@ def sucessores_se(atual,va,tempo):
 def Subida_Encosta(atual,vi,tempo):
     atual = cp.deepcopy(atual)
     va = vi
-    qt = 0
     while True:
-        qt += 1
         novo, vn = sucessores_se(atual,va,tempo)
         if vn>=va:
             return atual, va
         else:
             atual = cp.deepcopy(novo)
             va = vn
-            return atual, va
+           
 
 
 def Subida_Encosta_Alterada(atual,vi,tempo,tMax):
     atual = cp.deepcopy(atual)
     va = vi
     t=0
-    qt = 0
     while True:
-        qt += 1
         novo, vn = sucessores_se(atual,va,tempo)
         if vn>=va:
             if t>tMax:
-                return atual
+                return atual, va
             else:
-             tMax+=1 
-            return atual, va
+                t += 1
         else:
             atual = cp.deepcopy(novo)
             va = vn
-            t=0
-        return atual,va
+            t = 0
 
+
+def Tempera_Simulada(atual,va,tempo,t_ini,t_fim,fr):
+    atual = cp.deepcopy(atual)
+    va = va
+    t = t_ini
+
+    while t>t_fim:
+        novo, vn = sucessores_te(atual,tempo)
+        de = vn - va
+        if de<0:
+            atual = cp.deepcopy(novo)
+            va = vn
+        else:
+            ale = rd.uniform(0,1)
+            aux = ma.exp(-de/t)
+            if ale<aux:
+                atual = cp.deepcopy(novo)
+                va = vn
+        t = t*fr
+    
+    return atual, va
 
 if __name__ == '__main__':
     app.run(debug=True)
