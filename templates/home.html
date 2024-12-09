@@ -2,13 +2,37 @@
     <head>
         <title>Caixeiro Viajante</title>
         <link rel="stylesheet" href="{{ url_for ('static', filename='css/home.css') }}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='css/modal.css') }}">
         <link rel="icon" href="{{ url_for ('static', filename='img/icon.png') }}">
     </head>
+
+   
     
 
     <body background="{{ url_for ('static', filename='img/mapaPoint.jpg') }}">
     
         <div class="sapo">
+
+            <header>
+                <br>
+                     <button type="button" class="modal-btnHome" id="modalbtn"><img src="{{ url_for ('static',filename='img/question.png') }}"> </button>
+                    <div id =ModalAg class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <span class=" close">&times;</span>
+                            <center>
+                                <h3>Sobre</h3>
+                            </center>    
+                            <center>
+                                <p>Este projeto demonstra algoritmos aprendidos em programação linear, aplicados ao mapeamento das melhores rotas para um aplicativo de delivery (Caixeiro Viajante). Ele reúne algoritmos de busca local e genéticos.
+                                </p>
+                                <br>
+                                <p> A aplicação foi feita por Pedro Vargas e Matheus Lima 🤝 </p>
+                            </center>
+                        </div>
+                        </div>
+                
+                </header>
             <main>
                 <form id="form" action="/metodos" method="post">
                     <center>
@@ -34,5 +58,9 @@
 
         <script src="{{ url_for ('static', filename='js/home.js') }}">
         </script>
+
+          <script src=" {{url_for ('static',filename = 'js/modal.js')}}">
+            
+          </script>
     </body>
 </html>

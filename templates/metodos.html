@@ -2,6 +2,7 @@
 <head>
     <title>Métodos Do Caixeiro Viajante</title>
     <link rel="stylesheet" href="{{ url_for ('static', filename='css/metodos.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/modal.css') }}">
     <link rel="icon" href="{{ url_for ('static', filename='img/icon.png') }}">
 
 
@@ -14,31 +15,61 @@
 
 </header>
 
-<body background="{{ url_for ('static',filename='img/reMapa.jpeg') }}">
+<body background="{{ url_for ('static',filename='img/mapaPoint.jpg') }}">
    
  <div class=" sapo">
         <main>
             <h2>Escolha Qual Solução Deseja Visualizar</h2>
-            <button type="button" id="gerar-problema-btn">Base</button>
+            <button type="button" id="base-btn">Base</button>
             <br> <br>
-            <button type="button" id="solucao-inicial-btn">Melhor</button>
+            <button type="button" id="buscaLocal-btn">Algoritmos de Busca Local</button>
             <br> <br>
-
-            <div id="matriz-container" class="hidden">
-                <h4>Com base nos dados inseridos foi gerado uma matriz.Baseada nela, obtivemos esse resultado:</h4>
+            <button type="button" id="modalbtn">Algoritmo Genético</button>
+            <br> <br>
+            <div id =ModalAg class="modal">
+                <form action="/ag" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <span class=" close">&times;</span>
+                    <center>
+                        <h3>Algoritmo Genético</h3>
+                    </center>
+                    
+                    </div>
+                    <div class="modal-body">
+                    <input class="input" type="number"  placeholder="Total População" name = "tp" id = "tp" required>
+                    <br> <br>
+                    <input class="input" type="number" placeholder="Taxa de Cruzamento" name =  "tc" id = "tc" min="-10" max="10" step="0.01" required>
+                    <br> <br>
+                    <input class="input" type="number" placeholder="Taxa de Mutação " name =  "tm" id = "tm" min="-10" max="10" step="0.01" required>
+                    <br><br>
+                    <input class="input" type="number" placeholder="Intervalo de Geração" name = "ig" id = "ig" min="0" max="1" step="0.01" required>
+                    <br> <br>
+                    <input class="input" type="number"  placeholder="Numero de Gerações" name = "ng" id = "ng" required > 
+                    <br><br>
+                    <center>
+                       
+                        <button class="model-btn" type="submit">Calcular</button>
+                    </center>
+                </div>
+                </form>
+                </div>
+            </div>
+            <div id="base-container" class="hidden">
+                <h4>Com base nos dados inseridos foi gerado uma matriz. Baseada nela, obtivemos esse resultado:</h4>
                  <h4>Solução Inicial</h4>
                  <p>Rota: {{ SoluIni }}</p>
                   <h4>Tempo estimado</h4>
                   <p> Tempo: {{ Avalia}} min</p>
             </div>
 
-            <div id="solucao-inicial-container" class="hidden">
+            <div id="buscaLocal-container" class="hidden">
                 <h4>Aplicando os algoritmos de busca local, obtivemos os seguintes resultados:</h4>
                 <h4>Subida de Encosta</h4>
                 <p>Rota: {{ EncostaSi }}</p>
                 <p>Tempo Estimado: {{ EncostaVa }} min</p>
 
-                 <h4>Subida de Encosta Alterado **** MELHOR Resultado</h4>
+                 <h4>Subida de Encosta Alterado </h4>
                  <p> Rota: {{ EncostaAlt}} </p>
                  <p> MELHOR Tempo estimado: {{ EncostaAltVa}} min</p>
                  
@@ -46,16 +77,15 @@
                  <p> Rota: {{ TempSi}} </p>
                  <p> Tempo estimado: {{ TempVn}} min</p>
             </div>
-
-            <div id="avalia-container" class="hidden">
-                <h2>Método Avalia</h2>
-                    <p>Melhor Tempo: {{ EncostaAltVa }} min</p>
-            </div>
         </main>
     </div>
 
         <script src="{{ url_for ('static', filename='js/metodos.js') }}">
        
+        </script>
+                
+        <script src=" {{url_for ('static',filename = 'js/modal.js')}}">
+            
         </script>
    
 </body>

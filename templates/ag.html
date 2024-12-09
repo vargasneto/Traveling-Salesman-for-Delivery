@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="{{ url_for ('static', filename='css/home.css') }}">
+<link rel="icon" href="{{ url_for ('static', filename='img/icon.png') }}">
+</head>
+
+<header>
+
+<br>
+    <a href="/" >
+        <img src="{{ url_for ('static',filename='img/seta.png') }}">
+    </a>
+
+</header>
+
+
+<body background="{{ url_for ('static', filename='img/mapaPoint.jpg') }}">
+
+<div class="sapo">
+    <main>
+            <center>
+                <h2>Resultado do Algoritmo Genético</h2>
+                <h3>Rota: {{ag_s}}</h3>
+                <h3>Tempo estimado : {{ag_v}} min</h3>
+            </center>
+
+    </main>
+</div>
+
+</body>
+</html>
